@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sazanjan <sazanjan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 12:30:47 by sazanjan          #+#    #+#             */
-/*   Updated: 2025/07/22 13:46:48 by sazanjan         ###   ########.fr       */
+/*   Created: 2025/07/07 17:01:27 by sazanjan          #+#    #+#             */
+/*   Updated: 2025/07/22 14:17:09 by sazanjan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned char	*p;
-	size_t			i;
+	unsigned int	index;
 
-	i = 0;
-	p = (unsigned char *) s;
-	while (i < n)
+	if (!s || !f)
+		return ;
+	index = 0;
+	while (s[index] != '\0')
 	{
-		p[i] = 0;
-		i ++ ;
+		f(index, &s[index]);
+		index++;
 	}
 }

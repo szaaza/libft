@@ -1,32 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sazanjan <sazanjan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 12:08:51 by sazanjan          #+#    #+#             */
-/*   Updated: 2025/07/21 16:35:21 by sazanjan         ###   ########.fr       */
+/*   Created: 2025/07/18 11:26:00 by sazanjan          #+#    #+#             */
+/*   Updated: 2025/07/22 14:18:24 by sazanjan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-void	*ft_memcpy(void *destination, const void *source, size_t num)
+size_t	ft_strlen(const char *s);
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	size_t	len1;
+	size_t	len2;
 	size_t	i;
-	char	*dstc;
-	char	*srcc;
+	char	*result;
 
-	if (destination == NULL && source == NULL)
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = malloc(len1 + len2 + 1);
+	if (!result)
 		return (NULL);
 	i = 0;
-	dstc = (char *)destination;
-	srcc = (char *)source;
-	while (i < num)
+	while (i < len1)
 	{
-		dstc[i] = srcc[i];
+		result[i] = s1[i];
 		i++;
 	}
-	return (destination);
+	while (i < len1 + len2)
+	{
+		result[i] = s2[i - len1];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }

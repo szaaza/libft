@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sazanjan <sazanjan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 12:30:47 by sazanjan          #+#    #+#             */
-/*   Updated: 2025/07/22 13:46:48 by sazanjan         ###   ########.fr       */
+/*   Created: 2025/07/11 19:51:05 by szanjani          #+#    #+#             */
+/*   Updated: 2025/07/22 13:51:29 by sazanjan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char	*p;
-	size_t			i;
+	long	number;
 
-	i = 0;
-	p = (unsigned char *) s;
-	while (i < n)
+	number = n;
+	if (number < 0)
 	{
-		p[i] = 0;
-		i ++ ;
+		ft_putchar_fd('-', fd);
+		number *= -1;
 	}
+	if (number > 9)
+	{
+		ft_putnbr_fd(number / 10, fd);
+		ft_putchar_fd((number % 10) + '0', fd);
+	}
+	else
+		ft_putchar_fd(number + '0', fd);
 }
